@@ -81,10 +81,20 @@ hideItem.addEventListener('click', function() {
   }
 });
 
-// //*********** SEARCH FILTER ***********//
+//*********** SEARCH FILTER ***********//
 
-// const searchInput = document.querySelector('#search-note input');
+const searchInput = document.querySelector('#search-note input');
 
-// searchInput.addEventListener('keyup', function() {
-//   console.log('Key is released');
-// });
+searchInput.addEventListener('keyup', function(e) {
+  var searchChar = e.target.value.toUpperCase();
+  var notes = ul.getElementsByTagName('li');
+  Array.from(notes).forEach(function(note) {
+    var parText = note.firstElementChild.textContent;
+
+    if (parText.toUpperCase().indexOf(searchChar) !== -1) {
+      note.style.display = 'block';
+    } else {
+      note.style.display = 'none';
+    }
+  });
+});
